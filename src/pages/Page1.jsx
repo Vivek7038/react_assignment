@@ -1,7 +1,10 @@
+import useEscape from "../hooks/useEscape";
 import useToggle from "../hooks/useToggle";
 import "../styles/Page1.css";
 const Page1 = () => {
   const [isBoxVisible, toggleBoxVisibility] = useToggle();
+  useEscape([toggleBoxVisibility]);
+
   return (
     <div className="container">
       <h1>Question 1</h1>
