@@ -1,0 +1,8 @@
+.Pagination_Page_Container {
+  display: flex;
+  flex-direction: column;
+}
+
+.loader {
+  align-self: center;
+}
