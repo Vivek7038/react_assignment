@@ -1,12 +1,16 @@
 import React from "react";
 import "../styles/UserList.css";
+import UserCard from "./UserCard";
 const UserList = ({ users }) => {
   return (
     <div className="container">
       {users.map((user, index) => (
-        <div className="card" key={index}>
-          <img className="avatar" src={user.picture.thumbnail} alt="User" />
-          <span className="name">{`${user.name.first} ${user.name.last}`}</span>
+        <div key={index}>
+          <UserCard
+            imageSrc={user.picture.thumbnail}
+            altText="User"
+            name={`${user.name.first} ${user.name.last}`}
+          />
         </div>
       ))}
     </div>
