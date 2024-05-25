@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import PaginationBar from "../Components/PaginationBar";
 import usePagination from "../hooks/usePagination";
 import "../styles/Page2.css";
+import UserList from "../Components/UserList";
 const PaginationPage = () => {
   const [users, setUsers] = useState([]);
   const [userCache, setUserCache] = useState({});
@@ -75,6 +76,9 @@ const PaginationPage = () => {
           hasPreviousPage={hasPreviousPage}
         />
       </div>
+      {loading && <p className="loader">Loading...</p>}
+      {error && <p>Error: {error}</p>}
+      {!loading && !error && <UserList users={users} />}
     </div>
   );
 };
