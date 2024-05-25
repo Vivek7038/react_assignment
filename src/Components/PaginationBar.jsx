@@ -1,6 +1,8 @@
 import React from "react";
 import Button from "./Button";
 import "../styles/PaginationBar.css";
+import { calculateVisiblePages } from "../utils/paginationUtils";
+
 const PaginationBar = ({
   currentPage,
   totalPages,
@@ -10,23 +12,23 @@ const PaginationBar = ({
   hasNextPage,
   hasPreviousPage,
 }) => {
-  const pages = [...Array(totalPages).keys()].map((num) => num + 1);
+  const pages = calculateVisiblePages(currentPage, totalPages);
 
   return (
     <div className="pagination-container">
-      <Button onClick={() => onBack()} disabled={!hasPreviousPage}>
+      <Button onClick={onBack} disabled={!hasPreviousPage}>
         Prev
       </Button>
-      {pages.map((page) => (
+      {pages.map((page, index) => (
         <Button
-          key={page}
-          onClick={() => onPageChange(page)}
-          disabled={page === currentPage}
+          key={index}
+          onClick={() => typeof page === "number" && onPageChange(page)}
+          disabled={page === currentPage || page === "..."}
         >
           {page}
         </Button>
       ))}
-      <Button onClick={() => onNext()} disabled={!hasNextPage}>
+      <Button onClick={onNext} disabled={!hasNextPage}>
         Next
       </Button>
     </div>

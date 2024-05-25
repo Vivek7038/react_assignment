@@ -8,20 +8,12 @@ const usePagination = ({ pageSize, page, totalPage }) => {
   const hasNextPage = currentPage < totalPages;
   const hasPreviousPage = currentPage > 1;
 
-  const next = (toLastPage = false) => {
-    if (toLastPage) {
-      setCurrentPage(totalPages);
-    } else if (hasNextPage) {
-      setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-    }
+  const next = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
 
-  const back = (toFirstPage = false) => {
-    if (toFirstPage) {
-      setCurrentPage(1);
-    } else if (hasPreviousPage) {
-      setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-    }
+  const back = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
   const go = (pageNumber) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
