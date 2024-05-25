@@ -3,6 +3,7 @@ import PaginationBar from "../Components/PaginationBar";
 import usePagination from "../hooks/usePagination";
 import "../styles/Page2.css";
 import UserList from "../Components/UserList";
+import axios from "axios";
 const PaginationPage = () => {
   const [users, setUsers] = useState([]);
   const [userCache, setUserCache] = useState({});
@@ -37,13 +38,13 @@ const PaginationPage = () => {
         setLoading(true);
         setError(null);
         try {
-          const response = await fetch(
+          const response = await axios.get(
             `https://randomuser.me/api/?page=${currentPage}&results=${resultsPerPage}&seed=${seed}&inc=name,picture`,
           );
-          if (!response.ok) {
+          if (response.status < 200 || response.status >= 300) {
             throw new Error("Network response was not ok");
           }
-          const data = await response.json();
+          const data = await response.data;
           setUsers(data.results);
           setUserCache((prevCache) => ({
             ...prevCache,
